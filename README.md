@@ -20,15 +20,21 @@ flag this discrepancy back to the church board in writing before final sign-off)
 ## What's implemented (MVP)
 
 - Bottom-tab navigation: Home, Events, Sermons, Giving, More
-- Home: bilingual welcome, service times, "First Time?" CTA, live-service placeholder card
+- Home: real logo, real tagline ("Where Supernatural Is Natural"), service times, "Join With Us" / "First Time?" CTAs, live-service placeholder card
 - Newcomer screen ("For Newcomers" / புதியவர்களுக்கு)
-- Events & Calendar (mock data, "Register" CTA)
-- Sermons & Resources (mock data, Watch/Listen CTAs)
-- Giving (external link-out to giving partner + tithe/offering record placeholder)
-- About Us, Ministries, Prayer Requests (working form, local state only), Settings
+- About Us: real pastor testimony (Apostle Gururaj Iyengar's conversion story) + real photo
+- Our People: real team grid (Gururaj Iyengar, Liviu Cristescu, Obinna Madunagu) with real photos
+- Ministries: 6 real recurring ministries (Men's Fellowship, Night of Worship, Women's Fellowship, Youth Service, Sunday School, All Night Prayer) with real flyer images, schedules, and locations
+- Gallery: real event albums (structure only — thumbnails are placeholders pending exported photo assets)
+- Get In Touch: real address (91 Kings Road, Brentwood, Essex CM14 4DR), real phone/email, opening days note, working contact form
+- Giving: real "Your Tithes & Offerings" copy + link-out to a giving partner
+- Fundraising: real campaign ("To Open Closed Churches in the UK", Isaiah 61:4) with a live progress bar and preset/custom donation amounts
+- Events & Calendar, Sermons & Resources (still mock data — no CMS/API yet)
+- Prayer Requests (working form, local state only), Settings
 - **Full English ⇄ Tamil toggle** — every screen and the tab bar itself re-render in the selected language; the toggle persists across app restarts
+- Real photo/logo/flyer assets in `assets/church/` were cropped from screenshots of the church's live site (brentwoodtamilchurch.com), shared in chat since this environment cannot fetch that URL directly (network policy) — replace with originals from the church when available
 
-This maps to BRD sections FR-1 through FR-4, FR-5 (partial), FR-6 (partial), FR-9 (partial), FR-10.1, and NFR-2/NFR-3 (multilingual + accessibility groundwork). It intentionally does **not** attempt FR-11 through FR-14 (VerseVIEW real-time presentation sync, device sync, offline caching, live polling) — see below.
+This maps to BRD sections FR-1 through FR-10 (now backed by real content instead of placeholders), and NFR-2/NFR-3 (multilingual + accessibility groundwork). It intentionally does **not** attempt FR-11 through FR-14 (VerseVIEW real-time presentation sync, device sync, offline caching, live polling) — see below.
 
 ## Known gap: VerseVIEW integration
 
@@ -62,11 +68,13 @@ shipping to app stores.
 ## Project structure
 
 ```
+assets/church/   Real photos/logo/flyers cropped from the live site's screenshots
 src/
   components/     Shared UI (Card, PrimaryButton, ScreenHeader)
-  data/           Mock content (events, sermons) — replace with real API calls
+  data/           mockContent.ts (events, sermons — still placeholder) and
+                  churchData.ts (real team/ministries/contact/fundraising data)
   i18n/           LanguageContext + English/Tamil dictionaries
   navigation/     React Navigation setup + param types
   screens/        One file per screen
-  theme/          Colors, spacing, radius tokens
+  theme/          Colors, spacing, radius tokens (dark hero + maroon/gold to match branding)
 ```

@@ -1,36 +1,75 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
-import { Card } from '../components/Card';
+import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
 import { ScreenHeader } from '../components/ScreenHeader';
+import { ministries } from '../data/churchData';
 import { useLanguage } from '../i18n/LanguageContext';
-import { colors, spacing } from '../theme/theme';
-import type { TranslationKey } from '../i18n/translations';
+import { colors, radius, spacing } from '../theme/theme';
 
 export default function MinistriesScreen() {
   const { t } = useLanguage();
 
-  const ministries: TranslationKey[] = [
-    'ministriesChildren',
-    'ministriesYouth',
-    'ministriesWomen',
-    'ministriesMen',
-    'ministriesPrayerGroups',
-  ];
-
   return (
-    <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
-      <ScreenHeader title={t('ministriesTitle')} />
-      {ministries.map((key) => (
-        <Card key={key}>
-          <Text style={styles.title}>{t(key)}</Text>
-        </Card>
-      ))}
-    </ScrollView>
+    <View style={styles.screen}>
+      <FlatList
+        data={ministries}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.content}
+        ListHeaderComponent={
+          <ScreenHeader title={t('ministriesTitle')} subtitle={t('ministriesSubtitle')} />
+        }
+        renderItem={({ item }) => (
+          <View style={styles.card}>
+            {item.image ? (
+              <Image source={item.image} style={styles.image} resizeMode="cover" />
+            ) : (
+              <View style={styles.imageFallback}>
+                <Text style={styles.imageFallbackText}>🙏</Text>
+              </View>
+            )}
+            <View style={styles.cardBody}>
+              <Text style={styles.name}>{t(item.nameKey)}</Text>
+              <Text style={styles.schedule}>{t(item.scheduleKey)}</Text>
+              <Text style={styles.location}>{t(item.locationKey)}</Text>
+            </View>
+          </View>
+        )}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.background },
   content: { paddingHorizontal: spacing.lg, paddingBottom: spacing.lg },
-  title: { fontSize: 16, fontWeight: '700', color: colors.text },
+  card: {
+    backgroundColor: colors.surface,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: colors.border,
+    overflow: 'hidden',
+    marginBottom: spacing.md,
+    flexDirection: 'row',
+  },
+  image: {
+    width: 96,
+    height: 120,
+  },
+  imageFallback: {
+    width: 96,
+    height: 120,
+    backgroundColor: colors.heroBackground,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imageFallbackText: {
+    fontSize: 32,
+  },
+  cardBody: {
+    flex: 1,
+    padding: spacing.md,
+    justifyContent: 'center',
+  },
+  name: { fontSize: 15, fontWeight: '700', color: colors.text, marginBottom: spacing.xs },
+  schedule: { fontSize: 13, color: colors.primary, fontWeight: '600', marginBottom: spacing.xs },
+  location: { fontSize: 12, color: colors.textMuted },
 });

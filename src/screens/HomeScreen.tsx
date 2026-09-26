@@ -1,10 +1,11 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Card } from '../components/Card';
 import { PrimaryButton } from '../components/PrimaryButton';
+import { contactInfo } from '../data/churchData';
 import { serviceTimes } from '../data/mockContent';
 import { useLanguage } from '../i18n/LanguageContext';
-import { colors, spacing } from '../theme/theme';
+import { colors, radius, spacing } from '../theme/theme';
 import type { RootTabScreenProps } from '../navigation/types';
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
@@ -12,41 +13,62 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
 
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
-      <Text style={styles.appName}>{t('appName')}</Text>
-      <Text style={styles.tagline}>{t('homeTagline')}</Text>
-      <Text style={styles.welcomeTitle}>{t('homeWelcomeTitle')}</Text>
-      <Text style={styles.welcomeSubtitle}>{t('homeWelcomeSubtitle')}</Text>
-
-      <View style={styles.buttonRow}>
-        <PrimaryButton label={t('homeJoinUs')} />
-        <View style={{ height: spacing.sm }} />
-        <PrimaryButton
-          label={t('homeFirstTime')}
-          variant="outline"
-          onPress={() => navigation.navigate('More', { screen: 'Newcomer' })}
+      <View style={styles.hero}>
+        <Image
+          source={require('../../assets/church/logo.png')}
+          style={styles.logo}
+          resizeMode="contain"
         />
+        <Text style={styles.tagline}>{t('homeTagline')}</Text>
+        <Text style={styles.welcomeTitle}>{t('homeWelcomeTitle')}</Text>
+        <Text style={styles.welcomeSubtitle}>{t('homeWelcomeSubtitle')}</Text>
+
+        <View style={styles.buttonRow}>
+          <PrimaryButton label={t('homeJoinUs')} />
+          <View style={{ height: spacing.sm }} />
+          <PrimaryButton
+            label={t('homeFirstTime')}
+            variant="outlineOnDark"
+            onPress={() => navigation.navigate('More', { screen: 'Newcomer' })}
+          />
+        </View>
       </View>
 
-      <Card>
-        <Text style={styles.cardTitle}>{t('homeServiceTimes')}</Text>
-        <View style={styles.serviceRow}>
-          <Text style={styles.serviceLabel}>{t('tamilServiceLabel')}</Text>
-          <Text style={styles.serviceValue}>{serviceTimes.tamil}</Text>
-        </View>
-        <View style={styles.serviceRow}>
-          <Text style={styles.serviceLabel}>{t('englishServiceLabel')}</Text>
-          <Text style={styles.serviceValue}>{serviceTimes.english}</Text>
-        </View>
-      </Card>
+      <View style={styles.body}>
+        <Card>
+          <Text style={styles.cardTitle}>{t('homeServiceTimes')}</Text>
+          <View style={styles.serviceRow}>
+            <Text style={styles.serviceLabel}>{t('tamilServiceLabel')}</Text>
+            <Text style={styles.serviceValue}>{serviceTimes.tamil}</Text>
+          </View>
+          <View style={styles.serviceRow}>
+            <Text style={styles.serviceLabel}>{t('englishServiceLabel')}</Text>
+            <Text style={styles.serviceValue}>{serviceTimes.english}</Text>
+          </View>
+          <View style={styles.openingDaysPill}>
+            <Text style={styles.openingDaysText}>{t('homeOpeningDays')}</Text>
+          </View>
+        </Card>
 
-      <Card>
-        <View style={styles.liveHeader}>
-          <View style={styles.liveDot} />
-          <Text style={styles.cardTitle}>{t('homeLiveNow')}</Text>
-        </View>
-        <Text style={styles.verseviewNotice}>{t('verseviewNotice')}</Text>
-        <PrimaryButton label={t('homeWatchLive')} variant="outline" />
-      </Card>
+        <Card>
+          <View style={styles.liveHeader}>
+            <View style={styles.liveDot} />
+            <Text style={styles.cardTitle}>{t('homeLiveNow')}</Text>
+          </View>
+          <Text style={styles.verseviewNotice}>{t('verseviewNotice')}</Text>
+          <PrimaryButton label={t('homeWatchLive')} variant="outline" />
+        </Card>
+
+        <Card>
+          <Text style={styles.cardTitle}>{t('contactCallUs')}</Text>
+          <Text
+            style={styles.contactLine}
+            onPress={() => navigation.navigate('More', { screen: 'Contact' })}
+          >
+            {contactInfo.mobile}
+          </Text>
+        </Card>
+      </View>
     </ScrollView>
   );
 }
@@ -57,35 +79,42 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   content: {
-    padding: spacing.lg,
+    paddingBottom: spacing.lg,
   },
-  appName: {
-    fontSize: 13,
-    fontWeight: '600',
-    color: colors.accent,
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
+  hero: {
+    backgroundColor: colors.heroBackground,
+    paddingHorizontal: spacing.lg,
+    paddingTop: spacing.xl,
+    paddingBottom: spacing.xl,
+    alignItems: 'flex-start',
+  },
+  logo: {
+    width: 120,
+    height: 70,
+    marginBottom: spacing.sm,
   },
   tagline: {
     fontSize: 15,
     fontStyle: 'italic',
-    color: colors.primary,
-    marginTop: spacing.xs,
+    color: colors.accent,
   },
   welcomeTitle: {
     fontSize: 30,
     fontWeight: '700',
-    color: colors.text,
+    color: colors.onHero,
     marginTop: spacing.xs,
   },
   welcomeSubtitle: {
     fontSize: 15,
-    color: colors.textMuted,
+    color: colors.onHeroMuted,
     marginTop: spacing.xs,
     marginBottom: spacing.lg,
   },
   buttonRow: {
-    marginBottom: spacing.lg,
+    width: '100%',
+  },
+  body: {
+    padding: spacing.lg,
   },
   cardTitle: {
     fontSize: 17,
@@ -105,6 +134,19 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontWeight: '600',
   },
+  openingDaysPill: {
+    marginTop: spacing.sm,
+    backgroundColor: colors.primary,
+    borderRadius: radius.lg,
+    paddingVertical: spacing.xs,
+    paddingHorizontal: spacing.sm,
+    alignSelf: 'flex-start',
+  },
+  openingDaysText: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    fontWeight: '600',
+  },
   liveHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -122,5 +164,10 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     marginBottom: spacing.md,
     fontStyle: 'italic',
+  },
+  contactLine: {
+    color: colors.primary,
+    fontWeight: '600',
+    fontSize: 15,
   },
 });

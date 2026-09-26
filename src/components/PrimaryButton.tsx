@@ -9,19 +9,24 @@ export function PrimaryButton({
 }: {
   label: string;
   onPress?: () => void;
-  variant?: 'filled' | 'outline';
+  variant?: 'filled' | 'outline' | 'outlineOnDark';
 }) {
   const isFilled = variant === 'filled';
+  const isOutlineOnDark = variant === 'outlineOnDark';
   return (
     <Pressable
       onPress={onPress}
       style={({ pressed }) => [
         styles.button,
-        isFilled ? styles.filled : styles.outline,
+        isFilled ? styles.filled : isOutlineOnDark ? styles.outlineOnDark : styles.outline,
         pressed && styles.pressed,
       ]}
     >
-      <Text style={isFilled ? styles.filledLabel : styles.outlineLabel}>{label}</Text>
+      <Text
+        style={isFilled ? styles.filledLabel : isOutlineOnDark ? styles.outlineOnDarkLabel : styles.outlineLabel}
+      >
+        {label}
+      </Text>
     </Pressable>
   );
 }
@@ -42,6 +47,11 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: colors.primary,
   },
+  outlineOnDark: {
+    backgroundColor: 'transparent',
+    borderWidth: 1.5,
+    borderColor: colors.accent,
+  },
   pressed: {
     opacity: 0.8,
   },
@@ -52,6 +62,11 @@ const styles = StyleSheet.create({
   },
   outlineLabel: {
     color: colors.primary,
+    fontWeight: '600',
+    fontSize: 15,
+  },
+  outlineOnDarkLabel: {
+    color: colors.accent,
     fontWeight: '600',
     fontSize: 15,
   },

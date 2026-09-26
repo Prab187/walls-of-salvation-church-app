@@ -8,6 +8,12 @@ export const colors = {
   textMuted: '#7A6A66',
   border: '#EDE0D6',
   success: '#2F7D4F',
+  // Dark/hero tones matching the church's real branding (near-black with a
+  // maroon-to-navy glow), used for the home hero and section headers.
+  heroBackground: '#0F0A0C',
+  heroSurface: '#1C1214',
+  onHero: '#FFFFFF',
+  onHeroMuted: '#C9B8B4',
 };
 
 export const spacing = {

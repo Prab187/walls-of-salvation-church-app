@@ -13,7 +13,11 @@ export type RootTabParamList = {
 export type MoreStackParamList = {
   MoreMenu: undefined;
   About: undefined;
+  OurPeople: undefined;
   Ministries: undefined;
+  Gallery: undefined;
+  Contact: undefined;
+  Fundraising: undefined;
   Prayer: undefined;
   Newcomer: undefined;
   Settings: undefined;

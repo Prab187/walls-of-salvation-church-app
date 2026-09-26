@@ -8,10 +8,17 @@ import type { MoreStackScreenProps } from '../navigation/types';
 export default function MoreMenuScreen({ navigation }: MoreStackScreenProps<'MoreMenu'>) {
   const { t } = useLanguage();
 
-  const items: { label: string; screen: 'Newcomer' | 'About' | 'Ministries' | 'Prayer' | 'Settings' }[] = [
+  const items: {
+    label: string;
+    screen: 'Newcomer' | 'About' | 'OurPeople' | 'Ministries' | 'Gallery' | 'Contact' | 'Fundraising' | 'Prayer' | 'Settings';
+  }[] = [
     { label: t('moreNewcomer'), screen: 'Newcomer' },
     { label: t('moreAbout'), screen: 'About' },
+    { label: t('moreOurPeople'), screen: 'OurPeople' },
     { label: t('moreMinistries'), screen: 'Ministries' },
+    { label: t('moreGallery'), screen: 'Gallery' },
+    { label: t('moreContact'), screen: 'Contact' },
+    { label: t('moreFundraising'), screen: 'Fundraising' },
     { label: t('morePrayer'), screen: 'Prayer' },
     { label: t('moreSettings'), screen: 'Settings' },
   ];
