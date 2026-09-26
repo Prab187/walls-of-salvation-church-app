@@ -62,26 +62,37 @@ npx expo lint            # lint
 Verified in this environment via `npx expo export --platform web` (bundles
 cleanly) and a headless browser walkthrough of every tab and the language
 toggle. Native iOS/Android builds have not been produced here — this
-environment's network policy blocks `api.expo.dev`, so `eas build` cannot
-run from here. Build from a machine with normal network access instead:
+environment has no Xcode/Android Studio, and its network policy also blocks
+`api.expo.dev` (Expo's cloud build service). Build on a Mac with Xcode
+instead — this avoids Expo's cloud build (EAS) and any Expo account entirely:
 
 ```bash
-npm install -g eas-cli
 git clone https://github.com/Prab187/walls-of-salvation-church-app
 cd walls-of-salvation-church-app
 npm install
-eas login                        # your Expo account
-eas build:configure              # links the project, generates extra.eas.projectId
-eas build --platform ios --profile production   # needs the church's Apple Developer account
-eas submit --platform ios        # sends the build to TestFlight/App Store
+npx expo prebuild        # generates real ios/ and android/ native project folders (one-time)
+npx expo run:ios         # opens Xcode and builds/signs directly with your own Apple ID
 ```
 
+`expo prebuild` converts the project to what Expo calls the "bare workflow":
+after this, `ios/` and `android/` are ordinary native Xcode/Android Studio
+projects you own outright — you can open `ios/*.xcworkspace` in Xcode directly
+from then on, archive, and submit to TestFlight/the App Store the standard
+way, with zero dependency on Expo's servers or an Expo account. (The `expo`
+package itself stays as a dependency — it's just a JS/native library at that
+point, same as `react-native-screens` or any other package; it's `eas build`
+specifically that talks to Expo's cloud, and this path never calls it.)
+Requires a Mac with Xcode installed.
+
 Bundle identifier / Android package are already set to `uk.wallsofsalvation.app`
-in `app.json`, and build profiles are in `eas.json`
-(`development` / `preview` / `production`). For quick on-device testing
-without any Apple Developer account or build step, install the free
-**Expo Go** app on an iPhone and run `npx expo start` — no custom native
-modules are used, so Expo Go works directly.
+in `app.json`. `eas.json` is still in the repo in case EAS is ever wanted
+later, but it's unused by the `prebuild` + `run:ios` path above.
+
+For quick on-device testing without a Mac or any build step at all, install
+the free **Expo Go** app on an iPhone and run `npx expo start` from the repo
+— no custom native modules are used, so Expo Go works directly. (Expo Go
+itself is an Expo-made app, so this specific option does touch Expo, unlike
+the Xcode path above.)
 
 ## Project structure
 
