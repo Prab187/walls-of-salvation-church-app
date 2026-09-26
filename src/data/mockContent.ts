@@ -13,6 +13,7 @@ export type SermonItem = {
   speaker: string;
   date: string;
   durationMinutes: number;
+  youtubeUrl: string;
 };
 
 export const upcomingEvents: EventItem[] = [
@@ -39,22 +40,29 @@ export const upcomingEvents: EventItem[] = [
   },
 ];
 
+// WOS Official YouTube channel — used as the fallback link when a sermon has no
+// specific video yet. Real per-sermon video URLs should replace these once a
+// CMS/API exists (see README "Known gap").
+export const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@wallsofsalvationchurchofficial';
+
 export const latestSermons: SermonItem[] = [
   {
     id: 'srm-1',
     titleEn: 'Walking in Faith',
     titleTa: 'விசுவாசத்தில் நடத்தல்',
-    speaker: 'Pastor',
+    speaker: 'Apostle Gururaj Iyengar',
     date: '2026-09-20',
     durationMinutes: 42,
+    youtubeUrl: YOUTUBE_CHANNEL_URL,
   },
   {
     id: 'srm-2',
     titleEn: 'The Good Shepherd',
     titleTa: 'நல்ல மேய்ப்பன்',
-    speaker: 'Pastor',
+    speaker: 'Apostle Gururaj Iyengar',
     date: '2026-09-13',
     durationMinutes: 38,
+    youtubeUrl: YOUTUBE_CHANNEL_URL,
   },
   {
     id: 'srm-3',
@@ -63,6 +71,7 @@ export const latestSermons: SermonItem[] = [
     speaker: 'Guest Speaker',
     date: '2026-09-06',
     durationMinutes: 45,
+    youtubeUrl: YOUTUBE_CHANNEL_URL,
   },
 ];
 

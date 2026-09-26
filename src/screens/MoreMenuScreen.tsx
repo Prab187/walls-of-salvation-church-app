@@ -10,7 +10,7 @@ export default function MoreMenuScreen({ navigation }: MoreStackScreenProps<'Mor
 
   const items: {
     label: string;
-    screen: 'Newcomer' | 'About' | 'OurPeople' | 'Ministries' | 'Gallery' | 'Contact' | 'Fundraising' | 'Prayer' | 'Settings';
+    screen: 'Newcomer' | 'About' | 'OurPeople' | 'Ministries' | 'Gallery' | 'Contact' | 'Fundraising' | 'CheckIn' | 'Prayer' | 'Settings';
   }[] = [
     { label: t('moreNewcomer'), screen: 'Newcomer' },
     { label: t('moreAbout'), screen: 'About' },
@@ -19,6 +19,7 @@ export default function MoreMenuScreen({ navigation }: MoreStackScreenProps<'Mor
     { label: t('moreGallery'), screen: 'Gallery' },
     { label: t('moreContact'), screen: 'Contact' },
     { label: t('moreFundraising'), screen: 'Fundraising' },
+    { label: t('moreCheckIn'), screen: 'CheckIn' },
     { label: t('morePrayer'), screen: 'Prayer' },
     { label: t('moreSettings'), screen: 'Settings' },
   ];

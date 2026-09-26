@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import AboutScreen from '../screens/AboutScreen';
+import CheckInScreen from '../screens/ChildCheckInScreen';
 import ContactScreen from '../screens/ContactScreen';
 import FundraisingScreen from '../screens/FundraisingScreen';
 import GalleryScreen from '../screens/GalleryScreen';
@@ -46,6 +47,7 @@ export function MoreStackNavigator() {
         component={FundraisingScreen}
         options={{ title: t('fundraisingTitle') }}
       />
+      <Stack.Screen name="CheckIn" component={CheckInScreen} options={{ title: t('checkInTitle') }} />
       <Stack.Screen name="Prayer" component={PrayerScreen} options={{ title: t('prayerTitle') }} />
       <Stack.Screen name="Settings" component={SettingsScreen} options={{ title: t('settingsTitle') }} />
     </Stack.Navigator>

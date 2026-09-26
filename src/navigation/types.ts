@@ -18,6 +18,7 @@ export type MoreStackParamList = {
   Gallery: undefined;
   Contact: undefined;
   Fundraising: undefined;
+  CheckIn: undefined;
   Prayer: undefined;
   Newcomer: undefined;
   Settings: undefined;
