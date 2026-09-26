@@ -61,9 +61,27 @@ npx expo lint            # lint
 
 Verified in this environment via `npx expo export --platform web` (bundles
 cleanly) and a headless browser walkthrough of every tab and the language
-toggle. Native iOS/Android builds have not been produced (no Xcode/Android
-Studio/EAS credentials in this environment) — do that via `eas build` before
-shipping to app stores.
+toggle. Native iOS/Android builds have not been produced here — this
+environment's network policy blocks `api.expo.dev`, so `eas build` cannot
+run from here. Build from a machine with normal network access instead:
+
+```bash
+npm install -g eas-cli
+git clone https://github.com/Prab187/walls-of-salvation-church-app
+cd walls-of-salvation-church-app
+npm install
+eas login                        # your Expo account
+eas build:configure              # links the project, generates extra.eas.projectId
+eas build --platform ios --profile production   # needs the church's Apple Developer account
+eas submit --platform ios        # sends the build to TestFlight/App Store
+```
+
+Bundle identifier / Android package are already set to `uk.wallsofsalvation.app`
+in `app.json`, and build profiles are in `eas.json`
+(`development` / `preview` / `production`). For quick on-device testing
+without any Apple Developer account or build step, install the free
+**Expo Go** app on an iPhone and run `npx expo start` — no custom native
+modules are used, so Expo Go works directly.
 
 ## Project structure
 
