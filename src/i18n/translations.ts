@@ -11,7 +11,9 @@ export const translations = {
 
     homeWelcomeTitle: 'Welcome Home',
     homeWelcomeSubtitle: 'Walls of Salvation Church — Brentwood',
+    homeTagline: 'Where Supernatural Is Natural',
     homeFirstTime: 'First Time?',
+    homeJoinUs: 'Join With Us',
     homeServiceTimes: 'Service Times',
     tamilServiceLabel: 'Tamil Service',
     englishServiceLabel: 'English Service',
@@ -34,7 +36,10 @@ export const translations = {
     aboutTitle: 'About Us',
     aboutHistory: 'Our History',
     aboutLeadership: 'Leadership',
+    aboutPastorRole: 'Apostle',
+    aboutPastorName: 'Gururaj Iyengar',
     aboutFaith: 'Statement of Faith',
+    contactPhoneLabel: 'Call',
 
     eventsTitle: 'Events & Calendar',
     eventsUpcoming: 'Upcoming Events',
@@ -91,7 +96,9 @@ export const translations = {
 
     homeWelcomeTitle: 'நல்வரவு',
     homeWelcomeSubtitle: 'வால்ஸ் ஆஃப் சால்வேஷன் சர்ச் — பிரென்ட்வூட்',
+    homeTagline: 'இயற்கையானது அதிசயம் நடக்கும் இடம்',
     homeFirstTime: 'முதல் முறை வருகிறீர்களா?',
+    homeJoinUs: 'எங்களுடன் இணையுங்கள்',
     homeServiceTimes: 'ஆராதனை நேரங்கள்',
     tamilServiceLabel: 'தமிழ் ஆராதனை',
     englishServiceLabel: 'ஆங்கில ஆராதனை',
@@ -114,7 +121,10 @@ export const translations = {
     aboutTitle: 'எங்களைப் பற்றி',
     aboutHistory: 'எங்கள் வரலாறு',
     aboutLeadership: 'தலைமைக் குழு',
+    aboutPastorRole: 'அப்போஸ்தலர்',
+    aboutPastorName: 'குருராஜ் ஐயங்கார்',
     aboutFaith: 'விசுவாச அறிக்கை',
+    contactPhoneLabel: 'அழைக்க',
 
     eventsTitle: 'நிகழ்வுகள் & நாட்காட்டி',
     eventsUpcoming: 'வரவிருக்கும் நிகழ்வுகள்',

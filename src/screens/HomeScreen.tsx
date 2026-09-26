@@ -13,12 +13,16 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
       <Text style={styles.appName}>{t('appName')}</Text>
+      <Text style={styles.tagline}>{t('homeTagline')}</Text>
       <Text style={styles.welcomeTitle}>{t('homeWelcomeTitle')}</Text>
       <Text style={styles.welcomeSubtitle}>{t('homeWelcomeSubtitle')}</Text>
 
       <View style={styles.buttonRow}>
+        <PrimaryButton label={t('homeJoinUs')} />
+        <View style={{ height: spacing.sm }} />
         <PrimaryButton
           label={t('homeFirstTime')}
+          variant="outline"
           onPress={() => navigation.navigate('More', { screen: 'Newcomer' })}
         />
       </View>
@@ -61,6 +65,12 @@ const styles = StyleSheet.create({
     color: colors.accent,
     textTransform: 'uppercase',
     letterSpacing: 0.5,
+  },
+  tagline: {
+    fontSize: 15,
+    fontStyle: 'italic',
+    color: colors.primary,
+    marginTop: spacing.xs,
   },
   welcomeTitle: {
     fontSize: 30,
